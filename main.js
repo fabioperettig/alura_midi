@@ -7,17 +7,25 @@ function playSound(idSound) {
 
 const padList = document.querySelectorAll('.tecla');
 
-var counter = 0;
 
-while (counter < padList.length) {
-
+for(let counter = 0; counter < padList.length; counter++) {
     const pad = padList[counter];
     const instrument = pad.classList[1];
-
     const idAudio = `#som_${instrument}`;
 
     padList[counter].onclick = function () {
         playSound(idAudio);
     }
-    counter ++;
-};
+
+    pad.onkeydown = function(event){
+
+        if(event.code == 'Space' || event.code == 'Enter') {
+            pad.classList.add('ativa');
+        }
+    }
+
+    pad.onkeyup = function(){
+        pad.classList.remove('ativa');
+    }
+
+}
